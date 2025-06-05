@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣大學讀書會簽到系統</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">讀書會簽到系統</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">簽到資訊</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="checkinForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="university" class="form-label">大學</label>                                <select class="form-select" id="university" required>
+                                    <option value="">請選擇大學</option>
+                                    <!-- 國立綜合大學 -->
+                                    <option value="ntu">國立臺灣大學</option>
+                                    <option value="nthu">國立清華大學</option>
+                                    <option value="nymu">國立陽明交通大學</option>
+                                    <option value="nccu">國立政治大學</option>
+                                    <option value="ncu">國立中央大學</option>
+                                    <option value="ncku">國立成功大學</option>
+                                    <option value="nsysu">國立中山大學</option>
+                                    <option value="nchu">國立中興大學</option>
+                                    <option value="ncnu">國立暨南國際大學</option>
+                                    <option value="ndhu">國立東華大學</option>
+                                    <option value="ntpu">國立臺北大學</option>
+                                    <option value="nuk">國立高雄大學</option>
+                                    <!-- 國立師範及教育大學 -->
+                                    <option value="ntnu">國立臺灣師範大學</option>
+                                    <option value="nknu">國立高雄師範大學</option>
+                                    <option value="ncue">國立彰化師範大學</option>
+                                    <option value="ntue">國立臺北教育大學</option>
+                                    <option value="nptu">國立屏東大學</option>
+                                    <option value="nttu">國立臺東大學</option>
+                                    <!-- 國立科技大學 -->
+                                    <option value="ntust">國立臺灣科技大學</option>
+                                    <option value="nkust">國立高雄科技大學</option>
+                                    <option value="ntut">國立臺北科技大學</option>
+                                    <option value="yuntech">國立雲林科技大學</option>
+                                    <option value="ncut">國立勤益科技大學</option>
+                                    <option value="npu">國立澎湖科技大學</option>
+                                    <!-- 私立綜合大學 -->
+                                    <option value="fju">輔仁大學</option>
+                                    <option value="scu">東吳大學</option>
+                                    <option value="tku">淡江大學</option>
+                                    <option value="fcu">逢甲大學</option>
+                                    <option value="thu">東海大學</option>
+                                    <option value="cycu">中原大學</option>
+                                    <option value="mcu">銘傳大學</option>
+                                    <option value="pccu">中國文化大學</option>
+                                    <option value="shu">世新大學</option>
+                                    <option value="pu">靜宜大學</option>
+                                    <option value="cgu">長庚大學</option>
+                                    <option value="yzu">元智大學</option>
+                                    <option value="kmu">高雄醫學大學</option>
+                                    <option value="tmu">臺北醫學大學</option>
+                                    <!-- 私立科技大學 -->
+                                    <option value="ctu">建國科技大學</option>
+                                    <option value="must">明新科技大學</option>
+                                    <option value="cyut">朝陽科技大學</option>
+                                    <option value="ksu">崑山科技大學</option>
+                                    <option value="hku">弘光科技大學</option>
+                                    <option value="stu">樹德科技大學</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">簽到</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">大學資訊</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="universityInfo">
+                            請選擇大學以查看詳細資訊
+                        </div>
+                        <div id="map" class="mt-3" style="height: 300px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">簽到記錄</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>時間</th>
+                                <th>姓名</th>
+                                <th>學校</th>
+                            </tr>
+                        </thead>
+                        <tbody id="checkinRecords">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/locale/zh-tw.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
